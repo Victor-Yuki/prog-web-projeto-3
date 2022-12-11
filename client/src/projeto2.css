@@ -1,0 +1,129 @@
+.animais {
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  background-color: #1c1e21;
+  font-family: "Roboto", sans-serif;
+  color: rgb(0, 0, 0) black;
+}
+
+.api {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.api input {
+  width: 50px;
+  font-size: 1.5rem;
+}
+
+.input-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.botao {
+  background-color: #075e54;
+  color: white;
+  border-radius: 40px;
+  padding: 16px 32px;
+  text-align: center;
+  transition: 0.5s linear;
+  margin: 10px;
+}
+
+.botao:hover {
+  background-color: white;
+  color: #075e54;
+  cursor: pointer;
+}
+
+.lista-animais {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  height: 350px;
+  width: 200px;
+  border-radius: 5px;
+  background-color: #bb824b;
+  padding: 10px;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  border: 5px solid darkgray;
+}
+
+.card-img {
+  width: 180px;
+  height: 200px;
+  border-radius: 5px;
+  justify-self: center;
+  border: 2px solid black;
+}
+
+.img-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0;
+}
+
+.card-info {
+  height: 60px;
+  padding: 2px 10px;
+  border: 2.5px solid rgba(78, 43, 9, 0.767);
+  background-color: rgb(231, 194, 112);
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 0.6rem;
+}
+
+.card-name {
+  height: 25px;
+  padding: 2px 0;
+  color: #e9c27b;
+  box-shadow: 1px 1px black;
+}
+
+.fundo {
+  position: absolute;
+  height: 1500%;
+  width: 100%;
+  background-color: black;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.janela {
+  background-color: white;
+  height: 150px;
+  width: 200px;
+  border-radius: 10px;
+  position: absolute;
+  border: 2px solid red;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 5px 10px;
+}
+
+.botao-fechar {
+  padding: 5px 12px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+label {
+  color: white;
+  margin: 5px;
+}

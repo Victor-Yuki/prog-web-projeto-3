@@ -1,0 +1,411 @@
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+}
+
+nav {
+  background-color: #128c7e;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav {
+  position: fixed;
+  text-align: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+header {
+  padding-top: 91px;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar {
+  padding: 0 32px;
+  text-align: center;
+  display: flex;
+  width: 1050px;
+  height: 91px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-md {
+  display: none;
+}
+
+.menu {
+  display: none;
+}
+
+.nav-items {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-width: 75%;
+}
+.nav-items a {
+  color: white;
+  margin-right: 37px;
+}
+#ultimo-item {
+  margin-right: 0;
+  display: flex;
+  align-items: center;
+}
+#ultimo-item img,
+svg,
+span {
+  margin-left: 5px;
+}
+.globe-img {
+  width: 15px;
+}
+.triangulo {
+  width: 10px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px 24%;
+  width: 52%;
+  line-height: 1.5;
+}
+.container div {
+  padding-top: 25px;
+  width: 394px;
+  align-self: flex-start;
+}
+.title {
+  margin-bottom: 30px;
+}
+.container div h1 {
+  font-size: 2.1rem;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.2;
+}
+.content {
+  font-size: 1.1rem;
+}
+.obs {
+  color: #5e5e5e;
+}
+.link {
+  color: #1cb39b;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+.link-icon {
+  width: 3.5%;
+  margin-right: 7px;
+}
+.link-arrow {
+  width: 20px;
+}
+.link:hover span {
+  text-decoration: underline;
+}
+.phone-img {
+  width: 300px;
+}
+.phone-img-sm {
+  display: none;
+}
+
+.contents {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  text-align: center;
+  height: 100%;
+  line-height: 1.5;
+}
+.contents h2 {
+  color: black;
+  font-size: 2rem;
+  margin-top: 0;
+}
+.contents h4 {
+  color: #5e5e5e;
+  margin-bottom: 2px;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+}
+.contents p {
+  margin: 0 10% 5%;
+  font-size: 1.1rem;
+}
+.flex-content {
+  flex: 0.47;
+  padding: 80px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.wa-business {
+  background-color: #d8e8ea;
+  align-self: stretch;
+}
+.wa-business img {
+  width: 300px;
+}
+.wa-business p:nth-of-type(2) {
+  margin-bottom: 100px;
+}
+.wa-seguranca {
+  background-color: #e7f0e4;
+  align-self: stretch;
+}
+.wa-seguranca img {
+  width: 400px;
+}
+.text-link {
+  color: #39b4ed;
+}
+.text-link:hover {
+  text-decoration: underline;
+}
+
+footer {
+  background-color: #1c1e21;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer {
+  width: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer span {
+  color: white;
+  font-size: 1.1rem;
+}
+.footer button {
+  background-color: inherit;
+  border: none;
+  color: white;
+  font-size: 1rem;
+}
+
+.btn {
+  display: none;
+  background-color: #075e54;
+  color: white;
+  border-radius: 40px;
+  padding: 16px 32px;
+  text-align: center;
+}
+
+@media (min-width: 770px) and (max-width: 1036px) {
+  .navbar {
+    width: 100%;
+    height: 74px;
+  }
+  .logo-lg {
+    display: none;
+  }
+  .logo-md {
+    display: inline;
+  }
+  .nav-items {
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-around;
+  }
+  .nav-items a {
+    margin-right: 25px;
+  }
+  .text-lang {
+    display: none;
+  }
+  .triangulo {
+    display: none;
+  }
+
+  header {
+    width: 100%;
+  }
+  .container {
+    padding: 0 30px 5%;
+    width: 80%;
+    justify-content: space-between;
+  }
+
+  .container div {
+    width: 90%;
+  }
+  .title {
+    width: 100%;
+    display: block;
+  }
+  .content {
+    width: 80%;
+  }
+  .obs {
+    width: 80%;
+  }
+  .phone-img {
+    padding-top: 50px;
+    width: 40%;
+    align-self: flex-start;
+  }
+  .link-icon {
+    width: 14px;
+  }
+
+  .contents {
+    justify-content: space-between;
+  }
+  .contents p {
+    padding: 0 30px;
+  }
+  .contents h4 {
+    font-size: 1.1rem;
+    margin: 40px 5px 10px;
+    line-height: 2;
+  }
+  .flex-content {
+    flex: 0.48;
+  }
+  .wa-seguranca.flex-content {
+    justify-content: flex-start;
+  }
+  .wa-seguranca img {
+    width: 100%;
+  }
+  .wa-business img {
+    width: 65%;
+  }
+
+  .footer {
+    width: 100%;
+  }
+}
+
+@media (max-width: 770px) {
+  nav {
+    position: static;
+  }
+  .navbar {
+    width: 100%;
+  }
+  .logo-lg {
+    display: none;
+  }
+  .logo-md {
+    display: inline;
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .logo-md img {
+    width: 79.135px;
+  }
+  .menu {
+    display: block;
+    color: white;
+    position: absolute;
+    top: 15px;
+    right: 28px;
+  }
+  .menu img {
+    width: 27px;
+  }
+  .nav-items {
+    display: none;
+  }
+
+  header {
+    padding-top: 60px;
+    background-color: #128c7e;
+  }
+  .container {
+    width: 85%;
+    flex-direction: column;
+    padding: 0;
+    color: white;
+    text-align: center;
+  }
+  .container div h1 {
+    font-size: 1.55rem;
+  }
+  .container div {
+    width: 100%;
+    align-self: center;
+  }
+  .container p {
+    margin-top: 25px;
+    font-size: 1rem;
+  }
+  .title {
+    margin: 0 auto;
+  }
+  .btn {
+    margin: 10px 0;
+    display: inline-block;
+  }
+  .phone-img {
+    display: none;
+  }
+  .phone-img-sm {
+    width: 300px;
+    display: block;
+  }
+
+  .contents {
+    flex-direction: column;
+  }
+  .wa-seguranca img {
+    width: 300px;
+  }
+  .wa-business img {
+    width: 80%;
+  }
+  .contents h2 {
+    font-size: 1.6rem;
+  }
+  .contents p {
+    line-height: 1.75;
+    font-size: 1rem;
+  }
+  .obs {
+    display: none;
+  }
+  .link {
+    display: none;
+  }
+
+  footer {
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .footer button {
+    margin-top: 20px;
+  }
+}
