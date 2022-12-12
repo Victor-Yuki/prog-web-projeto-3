@@ -1,4 +1,4 @@
-const mongo = require('mongodb');
+const mongo = require('mongoose');
 
 module.exports = {
     connect() {
