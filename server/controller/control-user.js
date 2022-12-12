@@ -4,21 +4,35 @@ const Usuario = require('../model/usuarios');
 module.exports = {
 
     cadastrar(req, res) {
+        console.log(req.body);
         const { email, senha } = req.body;
 
         const novoUsuario = new Usuario({
             email: email,
-            senha: senha
+            senha: senha,
+            admin: false
         });
 
         bd.connect()
             .then(() => {
-                novoUsuario.save()
-                    .then(() => {
-                        return res.status(200).json({ message: 'O usuário foi cadastrado com sucesso' })
+                Usuario.findOne({ email })
+                    .then((user) => {
+                        if (user != null) {
+                            return res.status(400).json({ message: 'E-mail já cadastrado' });
+                        } else {
+                            console.log('cadastrar-save')
+                            novoUsuario.save()
+                                .then(() => {
+                                    console.log('usuario cadastrado');
+                                    return res.status(200).json({ message: 'O usuário foi cadastrado com sucesso' })
+                                })
+                                .catch((e) => {
+                                    return res.status(400).json({ message: 'Não foi possível cadastrar o usuário.' })
+                                });
+                        }
                     })
                     .catch((e) => {
-                        return res.status(400).json({ message: 'Não foi possível cadastrar o usuário.' })
+                        return res.status(400).json({ message: 'Não foi possível buscar pelo usuário.' })
                     });
             })
             .catch((e) => {
@@ -28,7 +42,6 @@ module.exports = {
 
     login(req, res) {
         const { email, senha } = req.body;
-
         bd.connect()
             .then(() => {
                 Usuario.findOne({ email })
@@ -36,7 +49,9 @@ module.exports = {
                         if (user.senha == senha) {
                             req.session.authenticated = true;
                             req.session.usuario = email;
-                            req.session.isAdmin = user.admin;
+                            req.session.admin = user.admin;
+                            console.log('o login foi feito com sucesso');
+                            return res.status(200).json({ message: 'Login feito com sucesso' });
                         } else {
                             return res.status(401).json({ message: 'Senha incorreta.' });
                         }

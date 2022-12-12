@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import API from "./API";
 import Janela from "./Janela";
@@ -10,15 +11,32 @@ function Animais() {
     [text, setText] = useState("");
 
   useEffect(() => {
-    var logado = localStorage.getItem("logado");
-    if (logado) {
-      hideLogin();
+    async function checkAuth() {
+      console.log('checkauth');
+      axios.get('/auth')
+        .then((res) => {
+          if (res.data.auth == true)
+            hideLogin();
+          else 
+            showLogin();
+        })
+        .catch((e) => {
+          console.log('Falha ao tentar verificar a autenticação');
+        });
     }
+    checkAuth();
   }, []);
+
+  
 
   function hideLogin() {
     setLoginHidden(true);
     setAPIHidden(false);
+  }
+
+  function showLogin() {
+    setLoginHidden(false);
+    setAPIHidden(true);
   }
 
   function showMessage(msg) {

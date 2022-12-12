@@ -22,20 +22,43 @@ app.use(session({
 const controlUsuario = require('./controller/control-user');
 const controlAnimais = require('./controller/control-animais');
 
+//controlAnimais.populateBD();
+
 const checkAuth = (req, res, next) => {
     if (req.session.authenticated == false)
         return res.status(401).json({message: 'Usuário não está logado.'});
     next();
 }
 
+const isUserAuth = (req, res, next) => {
+    if (req.session.authenticated == true) 
+        return res.status(200).json({auth: req.session.authenticated});
+    else
+        return res.status(401).json({message: 'Usuário não está logado.'});
+}
+
+const isUserAdmin = (req, res, next) => {
+    console.log('index-isuseradmin')
+    console.log(req.session);
+    if (req.session.admin == true)
+        return res.status(200).json({admin: req.session.admin});
+    else   
+        return res.status(401).json({message: 'Usuário não é admin'});
+}
+
 // rotas do usuário
 app.post('/cadastrar', controlUsuario.cadastrar);
 app.post('/login', controlUsuario.login);
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+})
+
+app.get('/auth', isUserAuth);
+app.get('/admin', isUserAdmin);
 
 // rotas do animais
-app.post('/addAnimais', checkAuth, controlAnimais.addAnimal);
+app.post('/addAnimal', checkAuth, controlAnimais.addAnimal);
 app.post('/getAnimais', checkAuth, controlAnimais.getAnimais);
-
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

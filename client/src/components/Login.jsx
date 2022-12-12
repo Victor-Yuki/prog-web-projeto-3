@@ -8,40 +8,50 @@ function Login(props) {
     [cadSenha, setCadSenha] = useState("");
 
   function handleLogin(ev) {
-    ev.preventDefault();
-    if (senha.length < 5) {
-      props.showMessage("A senha deve ter ao menos 5 caracteres.");
+    if (email.length == 0 || senha.length == 0) {
+      props.showMessage('Preencha os campos vazios de Login.')
     } else {
-      axios
-        .post("https://reqres.in/api/login", {
-          email: email,
-          password: senha
-        })
-        .then((res) => {
-          console.log(res);
-          if (res.status === 200) {
-            localStorage.setItem("logado", true);
-            props.hideLogin();
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-          props.showMessage("E-mail inválido.\ntente usar: eve.holt@reqres.in");
-        });
+      if (senha.length < 5) {
+        props.showMessage("A senha deve ter ao menos 5 caracteres.");
+      } else {
+        axios
+          .post("/login", {
+            email: email,
+            senha: senha
+          })
+          .then((res) => {
+            console.log(res.status);
+            if (res.status === 200) {
+              props.hideLogin();
+              window.location.reload();
+            }
+          })
+          .catch((error) => {
+            props.showMessage(error.response.data.message);
+          });
+      }
     }
+    
   }
 
   function handleCad(ev) {
     ev.preventDefault();
-    if( cadSenha.length < 5) {
-      props.showMessage('A senha deve ter ao menos 5 caracteres.');
+
+    if (cadEmail.length == 0 || cadSenha.length == 0){
+      props.showMessage('Preencha os campos vazios de cadastro.')
     } else {
-      axios.post('/cadastrar', {
-        email: cadEmail,
-        senha: cadSenha
-      }).then((res) => {
-        console.log(res.data);
-      });
+      if( cadSenha.length < 5) {
+        props.showMessage('A senha deve ter ao menos 5 caracteres.');
+      } else {
+        axios.post('/cadastrar', {
+          email: cadEmail,
+          senha: cadSenha
+        }).then((res) => {
+          console.log(res.data.message);
+        }).catch((err) => {
+          props.showMessage(err.response.data.message);
+        });
+      }
     }
   }
 

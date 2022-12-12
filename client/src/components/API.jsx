@@ -6,13 +6,55 @@ function API(props) {
   const [numAnimais, setNumAnimais] = useState(0),
     [listAnimais, setListAnimais] = useState([]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get('/pato')
-  //     .then((res) => {
-  //       console.log(res);
-  //     });
-  // }, []);
+  const [nome, setNome] = useState(''),
+    [url, setUrl] = useState(''),
+    [habitat, setHabitat] = useState(''),
+    [latim, setLatim] = useState(''),
+    [hideAdmin, setHideAdmin] = useState(true);
+
+
+  useEffect(() => {
+    async function checkAdmin() {
+      axios.get('/admin')
+        .then((res) => {
+          if (res.data.admin == true) {
+            setHideAdmin(false);
+          } else {
+            setHideAdmin(true);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          console.log('Falha ao tentar verificar o admin.')
+        });
+    }
+    
+    checkAdmin();
+  }, []);
+
+  function addAnimal() {
+    if (nome.length == 0 || url.length == 0 || latim.length == 0 || habitat.length == 0){
+      props.showMessage('Preencha os campos vazios de iserir animal.')
+    } else {
+      axios.post('/addAnimal', {
+        nome: nome,
+        url: url,
+        latim: latim,
+        habitat: habitat
+      }).then((res) => {
+        if(res.status == 200) {
+          setNome('');
+          setUrl('');
+          setHabitat('');
+          setLatim('');
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log('Erro em adicionar um animal')
+      })
+    }
+  }
 
   function gerarAnimal() {
     if (numAnimais <= 0) {
@@ -22,12 +64,13 @@ function API(props) {
       //alert("O número de animais está limitado em 10 por procura.");
       props.showMessage("O número de animais está limitado em 10 por procura.");
     } else {
-      let endpoint = "https://zoo-animal-api.herokuapp.com/animals/rand/";
+      //let endpoint = "https://zoo-animal-api.herokuapp.com/animals/rand/";
       axios
-        .get(endpoint + numAnimais)
+        .post('/getAnimais', {num: numAnimais})
         .then((res) => {
           //console.log(res.data);
-          listarAnimais(res.data);
+          if (res.status == 200)
+            listarAnimais(res.data.animais);
         })
         .catch((error) => {
           console.log(error);
@@ -40,10 +83,10 @@ function API(props) {
     const new_lista = [];
     for (var i = 0; i < animais.length; i++) {
       let new_animal = {
-        nome: animais[i].name,
-        latim: animais[i].latin_name,
+        nome: animais[i].nome,
+        latim: animais[i].latim,
         habitat: animais[i].habitat,
-        imagem: animais[i].image_link
+        imagem: animais[i].url
       };
       new_lista.push(new_animal);
     }
@@ -54,8 +97,21 @@ function API(props) {
   return (
     <div hidden={props.hidden}>
       <div className="api">
+        <h1 hidden={hideAdmin}>Inserir</h1>
+        <div className="admin-box" hidden={hideAdmin}>
+
+          <div className='input-box'>
+            <input className="admin-input" type='text' placeholder="nome" value={nome} onChange={(ev) => { setNome(ev.target.value) }} />
+            <input className="admin-input" type='text' placeholder="url" value={url} onChange={(ev) => { setUrl(ev.target.value) }} />
+            <input className="admin-input" type='text' placeholder="latim" value={latim} onChange={(ev) => { setLatim(ev.target.value) }} />
+            <input className="admin-input" type='text' placeholder="habitat" value={habitat} onChange={(ev) => { setHabitat(ev.target.value) }} />
+          </div>
+          <button className="botao" onClick={addAnimal}>ADD</button>
+        </div>
+        <h1>Buscar</h1>
         <div className="input-field">
           <input
+            className="api-input"
             type="number"
             value={numAnimais}
             onChange={(ev) => {
@@ -64,6 +120,9 @@ function API(props) {
           />
           <button class="botao" onClick={gerarAnimal}>
             GERAR
+          </button>
+          <button class="botao" onClick={() => { axios.get('/logout'); window.location.reload() }}>
+            LOGOUT
           </button>
         </div>
         <div className="lista-animais">
