@@ -48,6 +48,9 @@ function Login(props) {
           senha: cadSenha
         }).then((res) => {
           console.log(res.data.message);
+          props.showMessage(res.data.message);
+          setCadEmail('');
+          setCadSenha('');
         }).catch((err) => {
           props.showMessage(err.response.data.message);
         });

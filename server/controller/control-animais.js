@@ -40,8 +40,6 @@ module.exports = {
                 Animal.find()
                 .then((animais) => {
                     const randomAnimais = animais.sort(() => 0.5 - Math.random()).slice(0, num);
-                    console.log(num)
-                    console.log(animais.sort(() => 0.5 - Math.random()));
                     //console.log(randomAnimais);
                     return res.status(200).json({animais: randomAnimais, message: 'ok'});
                 })

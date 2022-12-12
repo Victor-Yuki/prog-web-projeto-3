@@ -19,21 +19,21 @@ function API(props) {
         .then((res) => {
           if (res.data.admin == true) {
             setHideAdmin(false);
-          } else {
-            setHideAdmin(true);
           }
         })
         .catch((e) => {
+          setHideAdmin(true);
+          console.log(hideAdmin);
           console.log(e);
           console.log('Falha ao tentar verificar o admin.')
         });
     }
-    
+
     checkAdmin();
   }, []);
 
   function addAnimal() {
-    if (nome.length == 0 || url.length == 0 || latim.length == 0 || habitat.length == 0){
+    if (nome.length == 0 || url.length == 0 || latim.length == 0 || habitat.length == 0) {
       props.showMessage('Preencha os campos vazios de iserir animal.')
     } else {
       axios.post('/addAnimal', {
@@ -42,17 +42,17 @@ function API(props) {
         latim: latim,
         habitat: habitat
       }).then((res) => {
-        if(res.status == 200) {
+        if (res.status == 200) {
           setNome('');
           setUrl('');
           setHabitat('');
           setLatim('');
         }
       })
-      .catch((e) => {
-        console.log(e);
-        console.log('Erro em adicionar um animal')
-      })
+        .catch((e) => {
+          console.log(e);
+          console.log('Erro em adicionar um animal')
+        })
     }
   }
 
@@ -66,7 +66,7 @@ function API(props) {
     } else {
       //let endpoint = "https://zoo-animal-api.herokuapp.com/animals/rand/";
       axios
-        .post('/getAnimais', {num: numAnimais})
+        .post('/getAnimais', { num: numAnimais })
         .then((res) => {
           //console.log(res.data);
           if (res.status == 200)
@@ -97,16 +97,18 @@ function API(props) {
   return (
     <div hidden={props.hidden}>
       <div className="api">
-        <h1 hidden={hideAdmin}>Inserir</h1>
-        <div className="admin-box" hidden={hideAdmin}>
+        <div hidden={hideAdmin}>
+          <h1>Inserir</h1>
+          <div className="admin-box">
 
-          <div className='input-box'>
-            <input className="admin-input" type='text' placeholder="nome" value={nome} onChange={(ev) => { setNome(ev.target.value) }} />
-            <input className="admin-input" type='text' placeholder="url" value={url} onChange={(ev) => { setUrl(ev.target.value) }} />
-            <input className="admin-input" type='text' placeholder="latim" value={latim} onChange={(ev) => { setLatim(ev.target.value) }} />
-            <input className="admin-input" type='text' placeholder="habitat" value={habitat} onChange={(ev) => { setHabitat(ev.target.value) }} />
+            <div className='input-box'>
+              <input className="admin-input" type='text' placeholder="nome" value={nome} onChange={(ev) => { setNome(ev.target.value) }} />
+              <input className="admin-input" type='text' placeholder="url" value={url} onChange={(ev) => { setUrl(ev.target.value) }} />
+              <input className="admin-input" type='text' placeholder="latim" value={latim} onChange={(ev) => { setLatim(ev.target.value) }} />
+              <input className="admin-input" type='text' placeholder="habitat" value={habitat} onChange={(ev) => { setHabitat(ev.target.value) }} />
+            </div>
+            <button className="botao" onClick={addAnimal}>ADD</button>
           </div>
-          <button className="botao" onClick={addAnimal}>ADD</button>
         </div>
         <h1>Buscar</h1>
         <div className="input-field">

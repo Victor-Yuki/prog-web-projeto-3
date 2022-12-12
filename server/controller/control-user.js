@@ -6,6 +6,11 @@ module.exports = {
     cadastrar(req, res) {
         console.log(req.body);
         const { email, senha } = req.body;
+        let isAdmin = false;
+
+        if (email == 'admin' && senha == 'admin'){
+            isAdmin = true;
+        }
 
         const novoUsuario = new Usuario({
             email: email,
