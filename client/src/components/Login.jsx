@@ -4,6 +4,8 @@ import axios from "axios";
 function Login(props) {
   const [email, setEmail] = useState(""),
     [senha, setSenha] = useState("");
+  const [cadEmail, setCadEmail] = useState(""),
+    [cadSenha, setCadSenha] = useState("");
 
   function handleLogin(ev) {
     ev.preventDefault();
@@ -29,30 +31,61 @@ function Login(props) {
     }
   }
 
+  function handleCad(ev) {
+    ev.preventDefault();
+    if( cadSenha.length < 5) {
+      props.showMessage('A senha deve ter ao menos 5 caracteres.');
+    } else {
+      axios.post('/cadastrar', {
+        email: cadEmail,
+        senha: cadSenha
+      }).then((res) => {
+        console.log(res.data);
+      });
+    }
+  }
+
   return (
     <div hidden={props.hidden}>
-      <form onSubmit={handleLogin}>
-        <label htmlFor="email">E-mail</label>
+      <div>
+        <label htmlFor="login-email">E-mail</label>
         <input
-          id="email"
+          id="login-email"
           type="email"
-          placeholder="eve.holt@reqres.in"
           onChange={(ev) => setEmail(ev.target.value)}
           minLength={3}
           required={true}
         />
-        <label htmlFor="senha">Senha</label>
+        <label htmlFor="login-senha">Senha</label>
         <input
-          id="senha"
+          id="login-senha"
           type="password"
           onChange={(ev) => setSenha(ev.target.value)}
           minLength={5}
           required={true}
         />
-        <button type="submit" class="botao" onClick={handleLogin}>
-          LOGIN
-        </button>
-      </form>
+        <button class="botao" onClick={handleLogin}>LOGIN</button>
+      </div>
+      <hr></hr>
+      <div>
+        <label htmlFor="cad-email">E-mail</label>
+        <input
+          id="cad-email"
+          type="email"
+          onChange={(ev) => setCadEmail(ev.target.value)}
+          minLength={3}
+          required={true}
+        />
+        <label htmlFor="cad-senha">Senha</label>
+        <input
+          id="cad-senha"
+          type="password"
+          onChange={(ev) => setCadSenha(ev.target.value)}
+          minLength={5}
+          required={true}
+        />
+        <button type="submit" class="botao" onClick={handleCad}>CADASTRAR</button>
+      </div>
     </div>
   );
 }

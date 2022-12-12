@@ -6,13 +6,13 @@ function API(props) {
   const [numAnimais, setNumAnimais] = useState(0),
     [listAnimais, setListAnimais] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get('/pato')
-      .then((res) => {
-        console.log(res);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get('/pato')
+  //     .then((res) => {
+  //       console.log(res);
+  //     });
+  // }, []);
 
   function gerarAnimal() {
     if (numAnimais <= 0) {

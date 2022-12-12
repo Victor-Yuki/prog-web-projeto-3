@@ -8,9 +8,13 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'view'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
-app.get('/pato', (req, res) => {
-    res.json({'resposta': 'oi'});
+app.post('/cadastrar', (req, res) => {
+    let {email , senha} = req.body;
+    console.log(email)
+    console.log(senha)
+    res.status(200).json({message: 'ok'});
 });
 
 
